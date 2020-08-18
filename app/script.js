@@ -53,7 +53,7 @@ class App extends React.Component {
     const interval = setInterval(() => this.step(), 1000);
     this.setState({
       status: 'work',
-      time: 10,
+      time: 1200,
       timer: interval,
     });
   }
