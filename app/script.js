@@ -5,10 +5,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: 'off',
-      time: 5,
+      status: 'work',
+      time: 60,
       timer: null,
     };
+  }
+
+  formatTime(time) {
+    const minutes = Math.floor(time / 60).toString();
+    const seconds = (time % 60).toString();
+    
+    const formatedTime = `${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+
+    return formatedTime;
   }
 
   render() {
@@ -39,7 +48,7 @@ class App extends React.Component {
         {this.state.status !== 'off'
         ?
         <div className="timer">
-          18:23
+          {this.formatTime(this.state.time)}
         </div>
         : ''
         }
