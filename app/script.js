@@ -21,14 +21,42 @@ class App extends React.Component {
   }
 
   step() {
+    const time = this.state.time;
+    const status = this.state.status;
+    this.setState({
+      time: time - 1,
+    });
 
+    if (time === 0 && status === 'work') {
+      this.setState({
+        status: 'rest',
+        time: 20,
+      });
+    }
+
+    if (time === 0 && status === 'rest') {
+      this.setState({
+        status: 'work',
+        time: 1200,
+      })
+    }
   }
 
   startTimer() {
-    return this.setState({
+    const interval = setInterval(() => this.step(), 1000);
+    this.setState({
       status: 'work',
       time: 1200,
-      timer: setInterval(() => this.step(), 1000),
+      timer: interval,
+    });
+  }
+
+  stopTimer() {
+    const interval = this.state.timer;
+    this.setState({
+      status: 'off',
+      time: null,
+      timer: clearInterval(interval),
     });
   }
 
@@ -71,7 +99,7 @@ class App extends React.Component {
         }
 
         {this.state.status !== 'off'
-        ? <button className="btn">Stop</button>
+        ? <button className="btn" onClick={() => this.stopTimer()}>Stop</button>
         : ''
         }
         
