@@ -5,8 +5,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: 'work',
-      time: 60,
+      status: 'off',
+      time: null,
       timer: null,
     };
   }
@@ -18,6 +18,18 @@ class App extends React.Component {
     const formatedTime = `${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
 
     return formatedTime;
+  }
+
+  step() {
+
+  }
+
+  startTimer() {
+    return this.setState({
+      status: 'work',
+      time: 1200,
+      timer: setInterval(() => this.step(), 1000),
+    });
   }
 
   render() {
@@ -54,7 +66,7 @@ class App extends React.Component {
         }
         
         {this.state.status === 'off'
-        ? <button className="btn">Start</button>
+        ? <button className="btn" onClick={() => this.startTimer()}>Start</button>
         : ''
         }
 
