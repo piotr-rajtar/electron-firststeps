@@ -20,6 +20,11 @@ class App extends React.Component {
     return formatedTime;
   }
 
+  playBell() {
+    const bell = new Audio('./sounds/bell.wav');
+    bell.play();
+  }
+
   step() {
     const time = this.state.time;
     const status = this.state.status;
@@ -28,6 +33,7 @@ class App extends React.Component {
     });
 
     if (time === 0 && status === 'work') {
+      this.playBell();
       this.setState({
         status: 'rest',
         time: 20,
@@ -35,6 +41,7 @@ class App extends React.Component {
     }
 
     if (time === 0 && status === 'rest') {
+      this.playBell();
       this.setState({
         status: 'work',
         time: 1200,
@@ -46,7 +53,7 @@ class App extends React.Component {
     const interval = setInterval(() => this.step(), 1000);
     this.setState({
       status: 'work',
-      time: 1200,
+      time: 10,
       timer: interval,
     });
   }
