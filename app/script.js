@@ -6,7 +6,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       status: 'off',
-      time,
+      time: 5,
       timer: null,
     };
   }
